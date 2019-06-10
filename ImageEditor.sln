@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginFramework", "PluginFr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlipImage", "FlipImage\FlipImage.csproj", "{135D6F35-22A0-4FBB-84B7-98204A03F772}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakeColors", "MakeColors\MakeColors.csproj", "{8EC2FF05-8BCB-472E-956A-E9916B5E6DA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{135D6F35-22A0-4FBB-84B7-98204A03F772}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{135D6F35-22A0-4FBB-84B7-98204A03F772}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{135D6F35-22A0-4FBB-84B7-98204A03F772}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EC2FF05-8BCB-472E-956A-E9916B5E6DA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EC2FF05-8BCB-472E-956A-E9916B5E6DA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EC2FF05-8BCB-472E-956A-E9916B5E6DA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EC2FF05-8BCB-472E-956A-E9916B5E6DA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
