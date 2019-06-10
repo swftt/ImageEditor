@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlipImage", "FlipImage\Flip
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakeColors", "MakeColors\MakeColors.csproj", "{8EC2FF05-8BCB-472E-956A-E9916B5E6DA0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixelArt", "PixelArt\PixelArt.csproj", "{ACA4893F-16A1-4547-B77B-D24F0E6E608B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{8EC2FF05-8BCB-472E-956A-E9916B5E6DA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EC2FF05-8BCB-472E-956A-E9916B5E6DA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EC2FF05-8BCB-472E-956A-E9916B5E6DA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACA4893F-16A1-4547-B77B-D24F0E6E608B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACA4893F-16A1-4547-B77B-D24F0E6E608B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACA4893F-16A1-4547-B77B-D24F0E6E608B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACA4893F-16A1-4547-B77B-D24F0E6E608B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
