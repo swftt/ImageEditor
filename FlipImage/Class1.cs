@@ -11,7 +11,7 @@ namespace FlipImage
     {
         public string Name => "Flip Image";
 
-        public Image RunPlungin(Image src)
+        public Image RunPlungin(Image src, int r, int g , int b , int a = 255)
         {
             Bitmap bitmap = new Bitmap(src);
             Bitmap newBitmap = new Bitmap(src);

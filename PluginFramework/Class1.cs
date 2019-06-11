@@ -3,7 +3,7 @@ namespace PluginFramework
 {
     public interface IFilter
     {
-        Image RunPlungin(Image src);
+        Image RunPlungin(Image src,int r,int g,int b,int a = 255);
         string Name { get; }
     }
     public interface IPixel

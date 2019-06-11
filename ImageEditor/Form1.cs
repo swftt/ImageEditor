@@ -12,12 +12,15 @@ namespace ImageEditor
 {
     public partial class Form1 : Form
     {
+        Image originalImage;
         Dictionary<string, IFilter> _filters = new Dictionary<string, IFilter>();
         Dictionary<string, IPixel> _pixels = new Dictionary<string, IPixel>();
         public Form1()
         {
 
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            originalImage = pictureBox1.Image;
             richTextBox1.Visible = false;
             WindowState = FormWindowState.Maximized;
             var assembly = Assembly.GetExecutingAssembly();
@@ -56,31 +59,41 @@ namespace ImageEditor
         }
         void CreateFilterMenu()
         {
-            pluginsToolStripMenuItem.DropDownItems.Clear();
             fileToolStripMenuItem.DropDownItems.Clear();
-            foreach (var pair in _filters)
-            {
-                var item = new ToolStripMenuItem(pair.Key);
-                item.Click += new EventHandler(menuItem_Click);
-                pluginsToolStripMenuItem.DropDownItems.Add(item);
-            }
-            var pixel = new ToolStripMenuItem("Pixel Art");
-            pixel.Click += new EventHandler(menuItem_Click);
-            pluginsToolStripMenuItem.DropDownItems.Add(pixel);
             var import = new ToolStripMenuItem("Import");
             import.Click += new EventHandler(import_Click);
             fileToolStripMenuItem.DropDownItems.Add(import);
             var save = new ToolStripMenuItem("Save");
             save.Click += new EventHandler(save_Click);
             fileToolStripMenuItem.DropDownItems.Add(save);
+            comboBox1.Items.Clear();
+            foreach (var pair in _filters)
+            {
+                comboBox1.Items.Add(pair.Key);
+            }
+            comboBox1.Items.Add(_pixels["Pixel Art"].Name);
         }
         void save_Click(object sender, EventArgs e)
         {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "Png Files|*.png";
-            sfd.ShowDialog();
+            try
+            {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "Png Files|*.png";
+                sfd.ShowDialog();
 
-            pictureBox1.Image.Save(sfd.FileName);
+                pictureBox1.Image.Save(sfd.FileName);
+
+            }
+            catch (Exception)
+            {
+
+
+            }
+            finally
+            {
+
+                MessageBox.Show("Picture successfully saved !");
+            }
         }
         void menuItem_Click(object sender, EventArgs e)
         {
@@ -92,12 +105,11 @@ namespace ImageEditor
                 if (string.Compare(menuitem.Text, "Pixel Art") != 0)
                 {
                     var filter = _filters[menuitem.Text];
-                    pictureBox1.Image = filter.RunPlungin(pictureBox1.Image);
+                    pictureBox1.Image = filter.RunPlungin(pictureBox1.Image, trackBar1.Value, trackBar2.Value, trackBar3.Value, trackBar4.Value);
                 }
                 else
                 {
                     var pixel = _pixels[menuitem.Text];
-
                     pictureBox1.Image = pixel.RunPlugin(pictureBox1.Image, (int)numericUpDown1.Value, richTextBox1.Lines);
                 }
             }
@@ -125,6 +137,7 @@ namespace ImageEditor
                 ofd.ShowDialog();
                 var btm = new Bitmap(ofd.FileName);
                 pictureBox1.Image = btm;
+                originalImage = btm;
             }
             catch (Exception)
             {
@@ -140,6 +153,7 @@ namespace ImageEditor
                 ofd.ShowDialog();
                 var btm = new Bitmap(ofd.FileName);
                 pictureBox1.Image = btm;
+                originalImage = btm;
             }
             catch (Exception)
             {
@@ -156,6 +170,182 @@ namespace ImageEditor
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+        private void ChangeTrackbars(bool change)
+        {
+            trackBar1.Enabled = change;
+            trackBar2.Enabled = change;
+            trackBar3.Enabled = change;
+            trackBar4.Enabled = change;
+        }
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+                ChangeTrackbars(false);
+
+                pictureBox1.Image = _filters["Make Red"].RunPlungin(pictureBox1.Image, trackBar1.Value, trackBar2.Value, trackBar3.Value, trackBar4.Value);
+            }
+            catch (Exception)
+            {
+
+
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
+                ChangeTrackbars(true);
+                label5.Text = trackBar1.Value.ToString();
+            }
+
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            pictureBox1.Image = originalImage;
+            trackBar1.Value = 0;
+            trackBar2.Value = 0;
+            trackBar3.Value = 0;
+            trackBar4.Value = 0;
+            label5.Text = "0";
+            label6.Text = "0";
+            label7.Text = "0";
+            label8.Text = "0";
+            comboBox1.ResetText();
+            comboBox1.SelectedIndex = -1;
+            numericUpDown1.Value = 1;
+        }
+
+        private void trackBar2_Scroll(object sender, EventArgs e)
+        {
+
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+                ChangeTrackbars(false);
+                pictureBox1.Image = _filters["Make Green"].RunPlungin(pictureBox1.Image, trackBar1.Value, trackBar2.Value, trackBar3.Value, trackBar4.Value);
+            }
+            catch (Exception)
+            {
+
+
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
+                ChangeTrackbars(true);
+                label6.Text = trackBar2.Value.ToString();
+            }
+        }
+
+        private void trackBar3_Scroll(object sender, EventArgs e)
+        {
+
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+                ChangeTrackbars(false);
+                pictureBox1.Image = _filters["Make Blue"].RunPlungin(pictureBox1.Image, trackBar1.Value, trackBar2.Value, trackBar3.Value, trackBar4.Value);
+            }
+            catch (Exception)
+            {
+
+
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
+                ChangeTrackbars(true);
+                label7.Text = trackBar3.Value.ToString();
+            }
+        }
+
+        private void trackBar4_Scroll(object sender, EventArgs e)
+        {
+
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+                ChangeTrackbars(false);
+                pictureBox1.Image = _filters["Make Alpha"].RunPlungin(pictureBox1.Image, trackBar1.Value, trackBar2.Value, trackBar3.Value, trackBar4.Value);
+            }
+            catch (Exception)
+            {
+
+
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
+                ChangeTrackbars(true);
+                label8.Text = trackBar4.Value.ToString();
+            }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+
+                if (string.Compare(comboBox1.SelectedItem.ToString(), "Pixel Art") != 0)
+                {
+                    var filter = _filters[comboBox1.SelectedItem.ToString()];
+                    if (string.Compare(filter.Name, "Make Red") == 0 || string.Compare(filter.Name, "Make Green") == 0 || string.Compare(filter.Name, "Make Blue") == 0 || string.Compare(filter.Name, "Make Alpha") == 0)
+                    {
+                        if(string.Compare(filter.Name,"Make Red") == 0)
+                        {
+                            pictureBox1.Image = filter.RunPlungin(pictureBox1.Image, 255,0,0);
+                            trackBar1.Value = 255;
+                            label5.Text = trackBar1.Value.ToString();
+                        }
+                        if(string.Compare(filter.Name,"Make Green") == 0)
+                        {
+                            pictureBox1.Image = filter.RunPlungin(pictureBox1.Image, 0, 255, 0);
+                            trackBar2.Value = 255;
+                            label6.Text = trackBar2.Value.ToString();
+                        }
+                        if (string.Compare(filter.Name, "Make Blue") == 0)
+                        {
+                            pictureBox1.Image = filter.RunPlungin(pictureBox1.Image, 0, 0, 255);
+                            trackBar3.Value = 255;
+                            label7.Text = trackBar3.Value.ToString();
+                        }
+                        if (string.Compare(filter.Name, "Make Alpha") == 0)
+                        {
+                            pictureBox1.Image = filter.RunPlungin(pictureBox1.Image, 0, 0, 0);
+                            trackBar4.Value = 255;
+                            label8.Text = trackBar4.Value.ToString();
+                        }
+                    }
+                    else
+                    {
+                        pictureBox1.Image = filter.RunPlungin(pictureBox1.Image, 0, 0, 0);
+                    }
+                }
+                else
+                {
+                    var pixel = _pixels[comboBox1.SelectedItem.ToString()];
+                    pictureBox1.Image = pixel.RunPlugin(pictureBox1.Image, (int)numericUpDown1.Value, richTextBox1.Lines);
+                }
+            }
+            catch (Exception)
+            {
+
+
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
+            }
         }
     }
 }
