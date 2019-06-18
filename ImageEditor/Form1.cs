@@ -60,12 +60,15 @@ namespace ImageEditor
         void CreateFilterMenu()
         {
             fileToolStripMenuItem.DropDownItems.Clear();
-            var import = new ToolStripMenuItem("Import");
+            var import = new ToolStripMenuItem("Import Image");
             import.Click += new EventHandler(import_Click);
             fileToolStripMenuItem.DropDownItems.Add(import);
             var save = new ToolStripMenuItem("Save");
             save.Click += new EventHandler(save_Click);
             fileToolStripMenuItem.DropDownItems.Add(save);
+            var plugin = new ToolStripMenuItem("Import Plugin");
+            plugin.Click += new EventHandler(plugin_Click);
+            fileToolStripMenuItem.DropDownItems.Add(plugin);
             comboBox1.Items.Clear();
             foreach (var pair in _filters)
             {
@@ -93,6 +96,33 @@ namespace ImageEditor
             {
 
                 MessageBox.Show("Picture successfully saved !");
+            }
+        }
+        void plugin_Click(object sender , EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Filter = "Dll Files|*.dll";
+                ofd.ShowDialog();
+                var asm = Assembly.LoadFrom(ofd.FileName);
+                foreach (var type in asm.GetTypes())
+                {
+                    if (type.GetInterface("IFilter") == typeof(IFilter))
+                    {
+                        var filter = Activator.CreateInstance(type) as IFilter;
+                        if (!_filters.ContainsKey(filter.Name))
+                        {
+                            _filters[filter.Name] = filter;
+                            comboBox1.Items.Add(filter.Name);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                
             }
         }
         void menuItem_Click(object sender, EventArgs e)
