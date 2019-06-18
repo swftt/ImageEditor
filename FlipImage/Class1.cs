@@ -11,6 +11,8 @@ namespace FlipImage
     {
         public string Name => "Flip Image";
 
+        public string Info => "Flips image on 180 degrees";
+
         public Image RunPlungin(Image src, int r, int g , int b , int a = 255)
         {
             Bitmap bitmap = new Bitmap(src);

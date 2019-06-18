@@ -12,6 +12,8 @@ namespace MakeColors
     {
         public string Name => "Make Red";
 
+        public string Info =>  "Make your picture mostly red ";
+
         public Image RunPlungin(Image src,int r,int g,int b,int a = 255)
         {
             var bitmap = new Bitmap(src);
@@ -34,6 +36,8 @@ namespace MakeColors
     public class MakeGreen : IFilter
     {
         public string Name => "Make Green";
+
+        public string Info => "Make your picture mostly green ";
 
         public Image RunPlungin(Image src, int r, int g, int b, int a = 255)
         {
@@ -58,6 +62,8 @@ namespace MakeColors
     {
         public string Name => "Make Blue";
 
+        public string Info => "Make your picture mostly blue ";
+
         public Image RunPlungin(Image src, int r, int g, int b, int a = 255)
         {
             var bitmap = new Bitmap(src);
@@ -81,6 +87,8 @@ namespace MakeColors
     {
         public string Name => "Make Alpha";
 
+        public string Info => "Sets apha of picture to maximum value - 255";
+
         public Image RunPlungin(Image src, int r, int g, int b, int a = 255)
         {
             var bitmap = new Bitmap(src);
@@ -103,6 +111,8 @@ namespace MakeColors
     public class MakeGrayscale : IFilter
     {
         public string Name => "Make Grayscale";
+
+        public string Info => "Adds grayscale to picture";
 
         public Image RunPlungin(Image src, int r, int g, int b, int a = 255)
         {

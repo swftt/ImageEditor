@@ -377,5 +377,16 @@ namespace ImageEditor
                 this.Cursor = Cursors.Default;
             }
         }
+
+        private void infoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string output = "";
+            foreach (var pair in _filters)
+            {
+                output += pair.Key + " ---> " + pair.Value.Info + "\n";
+            }
+            output += _pixels["Pixel Art"].Name + " ---> " + _pixels["Pixel Art"].Info;
+            MessageBox.Show(output);
+        }
     }
 }

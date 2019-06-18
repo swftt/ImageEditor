@@ -11,54 +11,8 @@ namespace PixelArt
     public class PixelArt : IPixel
     {
         public string Name => "Pixel Art";
-        
 
-        //private Color Clr(Color[] cs,Color[] clrs)
-        //{
-        //    Color c = Color.Black;
-
-        //    int r = 0;
-        //    int g = 0;
-        //    int b = 0;
-
-        //    for (int i = 0; i < cs.Length; i++)
-        //    {
-        //        r += cs[i].R;
-        //        g += cs[i].G;
-        //        b += cs[i].B;
-        //    }
-
-        //    r /= cs.Length;
-        //    g /= cs.Length;
-        //    b /= cs.Length;
-
-        //    int near = 1000;
-        //    int ind = 0;
-
-        //    for (int cl = 0; cl < clrs.Length; cl++)
-        //    {
-        //        int valR = (clrs[cl].R - r);
-        //        int valG = (clrs[cl].G - g);
-        //        int valB = (clrs[cl].B - b);
-
-        //        if (valR < 0) valR = -valR;
-        //        if (valG < 0) valG = -valG;
-        //        if (valB < 0) valB = -valB;
-
-        //        int total = valR + valG + valB;
-
-        //        if (total < near)
-        //        {
-        //            ind = cl;
-        //            near = total;
-        //        }
-        //    }
-
-        //    c = clrs[ind];
-
-        //    return c;
-        //}
-
+        public string Info => "Makes pixel art to picture,choose value of square scaling in \" Pixel art scale\"  ";
 
         public Image RunPlugin(Image src,int value, string[] htmlClrs)
         {
